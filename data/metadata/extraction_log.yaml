@@ -1,0 +1,75 @@
+extraction_date: '2025-10-25T23:55:20.076105Z'
+period: max
+interval: 1d
+total_tickers_attempted: 10
+successful_tickers: 10
+data_source: yfinance - OHLCV
+output_format: parquet
+compression: snappy
+raw_extraction: true
+transformations_applied: none
+status: success
+output_directory: data/raw_parquet
+file_naming_pattern: '{ticker}_ohlcv.parquet'
+total_rows_extracted: 85642
+ticker_details:
+  AAPL:
+    rows: 11309
+    date_range:
+      start: '1980-12-12'
+      end: '2025-10-24'
+    file: AAPL_ohlcv.parquet
+  MSFT:
+    rows: 9983
+    date_range:
+      start: '1986-03-13'
+      end: '2025-10-24'
+    file: MSFT_ohlcv.parquet
+  NVDA:
+    rows: 6732
+    date_range:
+      start: '1999-01-22'
+      end: '2025-10-24'
+    file: NVDA_ohlcv.parquet
+  GOOGL:
+    rows: 5331
+    date_range:
+      start: '2004-08-19'
+      end: '2025-10-24'
+    file: GOOGL_ohlcv.parquet
+  AMZN:
+    rows: 7157
+    date_range:
+      start: '1997-05-15'
+      end: '2025-10-24'
+    file: AMZN_ohlcv.parquet
+  META:
+    rows: 3379
+    date_range:
+      start: '2012-05-18'
+      end: '2025-10-24'
+    file: META_ohlcv.parquet
+  TSLA:
+    rows: 3856
+    date_range:
+      start: '2010-06-29'
+      end: '2025-10-24'
+    file: TSLA_ohlcv.parquet
+  JPM:
+    rows: 11497
+    date_range:
+      start: '1980-03-17'
+      end: '2025-10-24'
+    file: JPM_ohlcv.parquet
+  UNH:
+    rows: 10336
+    date_range:
+      start: '1984-10-17'
+      end: '2025-10-24'
+    file: UNH_ohlcv.parquet
+  XOM:
+    rows: 16062
+    date_range:
+      start: '1962-01-02'
+      end: '2025-10-24'
+    file: XOM_ohlcv.parquet
