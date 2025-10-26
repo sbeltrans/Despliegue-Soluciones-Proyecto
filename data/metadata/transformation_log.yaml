@@ -1,0 +1,102 @@
+transformation_date: '2025-10-26T18:01:11.838242Z'
+date_range:
+  start: '2015-01-01'
+  end: '2024-12-31'
+tickers:
+- AAPL
+- MSFT
+- NVDA
+- GOOGL
+- AMZN
+- META
+- TSLA
+- JPM
+- UNH
+- XOM
+total_rows: 25160
+technical_indicators:
+- SMA_20
+- SMA_50
+- EMA_12
+- EMA_26
+- RSI_14
+- MACD
+- MACD_signal
+- MACD_diff
+- BB_upper
+- BB_middle
+- BB_lower
+- BB_width
+- OBV
+- ATR_14
+additional_features:
+- Returns
+- Volatility_10
+- Volume_change
+total_features: 17
+target_definition: Y = 1 si Close(t+1) > Close(t), 0 en caso contrario
+target_distribution:
+  Comprar (1): 13281
+  Vender (0): 11879
+  Balance: 52.8% / 47.2%
+ticker_stats:
+  AAPL:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1339
+      Vender: 1177
+  MSFT:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1345
+      Vender: 1171
+  NVDA:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1373
+      Vender: 1143
+  GOOGL:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1352
+      Vender: 1164
+  AMZN:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1346
+      Vender: 1170
+  META:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1321
+      Vender: 1195
+  TSLA:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1303
+      Vender: 1213
+  JPM:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1303
+      Vender: 1213
+  UNH:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1330
+      Vender: 1186
+  XOM:
+    rows: 2516
+    features: 17
+    target_distribution:
+      Comprar: 1269
+      Vender: 1247
