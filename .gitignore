@@ -1,0 +1,56 @@
+# Archivos de datos
+data/raw/*.csv
+data/processed/*.csv
+data/processed/*.parquet
+*.csv
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Variables de entorno
+.env
+.env.local
+
+# MLflow
+mlruns/
+
+# DVC - Solo ignorar archivos de datos grandes, NO los .dvc metadata
+# Los archivos .dvc deben estar en Git para rastrear versiones
+
+# Claude - Solo instrucciones internas
+CLAUDE.md
+
+# AWS credentials - NUNCA versionar credenciales
+aws_credentials.sh
+*.pem
+*.key
+
+# Documentos
+Rubrica_Proyecto_Entrega_1.pdf
+propuesta_tablero.jpeg
