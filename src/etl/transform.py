@@ -83,12 +83,11 @@ def filter_dates(df, start_date, end_date):
 
 
 def clean_features(df):
-    """Elimina precio absoluto y NaN."""
-    # Eliminar OHLCV
-    price_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
-    df = df.drop(columns=[col for col in price_cols if col in df.columns])
-
-    # Eliminar Dividends, Stock Splits si existen
+    """Limpia NaN pero PRESERVA las columnas de precio OHLCV."""
+    # ELIMINAR SOLO columnas que no necesitamos
+    # Ya NO eliminamos OHLCV - los preservamos para la aplicación
+    
+    # Eliminar solo columnas innecesarias
     extra_cols = ['Dividends', 'Stock Splits']
     df = df.drop(columns=[col for col in extra_cols if col in df.columns], errors='ignore')
 
@@ -97,15 +96,50 @@ def clean_features(df):
     return df
 
 
+def save_features_with_prices(df, ticker):
+    """Guarda features INCLUYENDO columnas de precio OHLCV."""
+    output_file = os.path.join(OUTPUT_DIR, f'{ticker}_features.parquet')
+    
+    # Definir el orden deseado de columnas
+    base_columns = ['Ticker', 'Date']
+    
+    # Columnas de precio OHLCV que debemos preservar
+    price_columns = ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
+    
+    # Columnas de indicadores técnicos
+    indicator_columns = [
+        'SMA_20', 'SMA_50', 'EMA_12', 'EMA_26', 'RSI_14',
+        'MACD', 'MACD_signal', 'MACD_diff', 
+        'BB_upper', 'BB_middle', 'BB_lower', 'BB_width',
+        'ATR_14', 'OBV', 'Returns', 'Volatility_10', 'Volume_change', 'Target'
+    ]
+    
+    # Combinar todas las columnas (solo las que existen en el DataFrame)
+    all_columns = base_columns + price_columns + indicator_columns
+    existing_columns = [col for col in all_columns if col in df.columns]
+    
+    # Reordenar el DataFrame
+    df_sorted = df[existing_columns]
+    
+    # Guardar
+    df_sorted.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
+    
+    # Información de depuración
+    price_cols_found = [col for col in price_columns if col in df.columns]
+    print(f"  Precios preservados: {price_cols_found}")
+    
+    return df_sorted
+
+
 def transform_ticker(ticker):
-    """Pipeline completo para un ticker."""
+    """Pipeline completo para un ticker - PRESERVANDO PRECIOS."""
     print(f"Procesando {ticker}")
 
     # 1. Cargar histórico completo
     df = load_raw_data(ticker)
     total_original = len(df)
 
-    # 2. Calcular indicadores sobre histórico completo (evita NaN en bordes)
+    # 2. Calcular indicadores sobre histórico completo
     df = calculate_technical_indicators(df)
     df = calculate_additional_features(df)
     df = create_target(df)
@@ -115,21 +149,20 @@ def transform_ticker(ticker):
     # 3. Filtrar fechas 2015-2024
     df = filter_dates(df, START_DATE, END_DATE)
 
-    # 4. Limpiar (eliminar precio absoluto y NaN)
+    # 4. Limpiar (SOLO eliminar columnas innecesarias y NaN, PRESERVAR precios)
     df = clean_features(df)
 
+    # 5. Guardar INCLUYENDO columnas de precio
+    df_final = save_features_with_prices(df, ticker)
+
     # Balance de Y
-    y_counts = df['Target'].value_counts()
-    pct_buy = (y_counts.get(1, 0) / len(df) * 100) if len(df) > 0 else 0
-    pct_sell = (y_counts.get(0, 0) / len(df) * 100) if len(df) > 0 else 0
+    y_counts = df_final['Target'].value_counts()
+    pct_buy = (y_counts.get(1, 0) / len(df_final) * 100) if len(df_final) > 0 else 0
+    pct_sell = (y_counts.get(0, 0) / len(df_final) * 100) if len(df_final) > 0 else 0
 
-    print(f"{ticker}: {len(df)} días (2015-2024), Y balance: Comprar {pct_buy:.1f}% / Vender {pct_sell:.1f}%")
+    print(f"{ticker}: {len(df_final)} días (2015-2024), Y balance: Comprar {pct_buy:.1f}% / Vender {pct_sell:.1f}%")
 
-    # 5. Guardar
-    output_file = os.path.join(OUTPUT_DIR, f'{ticker}_features.parquet')
-    df.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
-
-    return df
+    return df_final
 
 
 def create_metadata(stats, combined_df):
@@ -138,12 +171,16 @@ def create_metadata(stats, combined_df):
 
     total_buy = int(combined_df['Target'].sum())
     total_sell = int((combined_df['Target'] == 0).sum())
+    
+    # Contar columnas de precio preservadas
+    price_columns_preserved = [col for col in combined_df.columns if col in ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']]
 
     metadata = {
         'transformation_date': datetime.utcnow().isoformat() + 'Z',
         'date_range': {'start': START_DATE, 'end': END_DATE},
         'tickers': TICKERS,
         'total_rows': len(combined_df),
+        'price_columns_preserved': price_columns_preserved,
         'technical_indicators': [
             'SMA_20', 'SMA_50', 'EMA_12', 'EMA_26', 'RSI_14',
             'MACD', 'MACD_signal', 'MACD_diff',
@@ -173,7 +210,8 @@ def main():
 
     print("\nTransformación y Feature Engineering")
     print(f"Periodo final: {START_DATE} a {END_DATE}")
-    print(f"Tickers: {len(TICKERS)}\n")
+    print(f"Tickers: {len(TICKERS)}")
+    print("✅ PRESERVANDO columnas de precio OHLCV para la aplicación\n")
 
     all_data = []
     stats = {}
@@ -186,6 +224,7 @@ def main():
             stats[ticker] = {
                 'rows': len(df),
                 'features': len(df.columns) - 3,
+                'price_columns': [col for col in df.columns if col in ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']],
                 'target_distribution': {
                     'Comprar': int(df['Target'].sum()),
                     'Vender': int((df['Target'] == 0).sum())
@@ -195,21 +234,27 @@ def main():
             print(f"Error en {ticker}: {e}")
 
     # Consolidar
-    combined = pd.concat(all_data, ignore_index=True)
-    combined_file = os.path.join(OUTPUT_DIR_ML, 'features_combined.parquet')
-    combined.to_parquet(combined_file, index=False, engine='pyarrow', compression='snappy')
+    if all_data:
+        combined = pd.concat(all_data, ignore_index=True)
+        combined_file = os.path.join(OUTPUT_DIR_ML, 'features_combined.parquet')
+        combined.to_parquet(combined_file, index=False, engine='pyarrow', compression='snappy')
 
-    create_metadata(stats, combined)
+        create_metadata(stats, combined)
 
-    # Resumen
-    total_buy = combined['Target'].sum()
-    total_sell = (combined['Target'] == 0).sum()
+        # Resumen
+        total_buy = combined['Target'].sum()
+        total_sell = (combined['Target'] == 0).sum()
+        
+        price_cols_count = len([col for col in combined.columns if col in ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])
 
-    print(f"\nRESUMEN")
-    print(f"Total filas: {len(combined):,}")
-    print(f"Total features: {len(combined.columns) - 3}")
-    print(f"Y balance global: Comprar {total_buy/len(combined)*100:.1f}% / Vender {total_sell/len(combined)*100:.1f}%")
-    print(f"Archivos: {OUTPUT_DIR}/")
+        print(f"\nRESUMEN")
+        print(f"Total filas: {len(combined):,}")
+        print(f"Total columnas: {len(combined.columns)}")
+        print(f"Columnas de precio preservadas: {price_cols_count}")
+        print(f"Y balance global: Comprar {total_buy/len(combined)*100:.1f}% / Vender {total_sell/len(combined)*100:.1f}%")
+        print(f"Archivos: {OUTPUT_DIR}/")
+    else:
+        print("❌ No se procesaron datos correctamente")
 
 
 if __name__ == "__main__":

@@ -1,75 +1,68 @@
-extraction_date: '2025-10-25T23:55:20.076105Z'
+extraction_date: '2025-11-11T12:38:37.399835Z'
 period: max
 interval: 1d
-total_tickers_attempted: 10
-successful_tickers: 10
+total_tickers: 10
+total_rows_extracted: 85752
 data_source: yfinance - OHLCV
 output_format: parquet
-compression: snappy
-raw_extraction: true
-transformations_applied: none
-status: success
-output_directory: data/raw_parquet
-file_naming_pattern: '{ticker}_ohlcv.parquet'
-total_rows_extracted: 85642
 ticker_details:
   AAPL:
-    rows: 11309
+    rows: 11320
     date_range:
       start: '1980-12-12'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: AAPL_ohlcv.parquet
   MSFT:
-    rows: 9983
+    rows: 9994
     date_range:
       start: '1986-03-13'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: MSFT_ohlcv.parquet
   NVDA:
-    rows: 6732
+    rows: 6743
     date_range:
       start: '1999-01-22'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: NVDA_ohlcv.parquet
   GOOGL:
-    rows: 5331
+    rows: 5342
     date_range:
       start: '2004-08-19'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: GOOGL_ohlcv.parquet
   AMZN:
-    rows: 7157
+    rows: 7168
     date_range:
       start: '1997-05-15'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: AMZN_ohlcv.parquet
   META:
-    rows: 3379
+    rows: 3390
     date_range:
       start: '2012-05-18'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: META_ohlcv.parquet
   TSLA:
-    rows: 3856
+    rows: 3867
     date_range:
       start: '2010-06-29'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: TSLA_ohlcv.parquet
   JPM:
-    rows: 11497
+    rows: 11508
     date_range:
       start: '1980-03-17'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: JPM_ohlcv.parquet
   UNH:
-    rows: 10336
+    rows: 10347
     date_range:
       start: '1984-10-17'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: UNH_ohlcv.parquet
   XOM:
-    rows: 16062
+    rows: 16073
     date_range:
       start: '1962-01-02'
-      end: '2025-10-24'
+      end: '2025-11-10'
     file: XOM_ohlcv.parquet

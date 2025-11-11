@@ -10,7 +10,7 @@ import traceback
 from dash import Dash, dcc, html, Input, Output
 
 # === CONFIG ===
-DATA_DIR = "D:/Documents/jcbl/MIAD 2025 ciclo 4/Curso Gerencia de Proyectos/Despliegue-Soluciones-Proyecto/data/processed"          # carpeta con *_features.parquet
+DATA_DIR = "data/processed"          # carpeta con *_features.parquet
 FILE_PATTERN = "*_features.parquet"
 DATE_COL = "Date"
 PRICE_COLS = ["Adj Close", "Close"]
