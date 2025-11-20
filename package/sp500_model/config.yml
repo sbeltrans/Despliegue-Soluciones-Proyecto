@@ -1,0 +1,42 @@
+# Nombre del paquete
+package_name: sp500-modelo
+
+# Archivos de modelo
+pipeline_save_file: sp500-modelo-output-
+
+# Variables de entrada (17 features originales antes de PCA)
+features:
+  - SMA_20
+  - SMA_50
+  - EMA_12
+  - EMA_26
+  - RSI_14
+  - MACD
+  - MACD_signal
+  - MACD_diff
+  - BB_upper
+  - BB_middle
+  - BB_lower
+  - BB_width
+  - ATR_14
+  - OBV
+  - Returns
+  - Volatility_10
+  - Volume_change
+
+# Variable objetivo
+target: Target
+
+# Configuración del pipeline
+# PCA
+pca_components: 15
+
+# XGBoost hiperparámetros (optimizados con Optuna)
+n_estimators: 166
+max_depth: 5
+learning_rate: 0.08156132554133447
+subsample: 0.6536122368071011
+colsample_bytree: 0.9138889181283119
+min_child_weight: 4
+gamma: 4.477319114506578
+random_state: 42

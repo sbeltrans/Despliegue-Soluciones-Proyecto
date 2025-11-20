@@ -1,0 +1,28 @@
+[build-system]
+requires = [
+    "setuptools>=58",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+minversion = "2.0"
+addopts = "-rfEX -p pytester --strict-markers"
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test", "Acceptance"]
+python_functions = ["test"]
+testpaths = ["tests"]
+xfail_strict = true
+filterwarnings = [
+    "error",
+    "ignore:The distutils package is deprecated:DeprecationWarning",
+]
+
+[tool.black]
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+lines_between_sections = 1
+skip = "migrations"
