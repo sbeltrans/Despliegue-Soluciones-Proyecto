@@ -11,12 +11,8 @@ pipeline_file_name = f"{config.app_config.pipeline_save_file}{_version}.pkl"
 _sp500_pipe = load_pipeline(file_name=pipeline_file_name)
 
 
-def make_prediction(
-    *,
-    input_data: t.Union[pd.DataFrame, dict],
-) -> dict:
-    """Make a prediction using a saved model pipeline."""
-
+def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
+    # Validamos, predecimos y retornamos resultados con probabilidades
     data = pd.DataFrame(input_data)
     validated_data, errors = validate_inputs(input_data=data)
     results = {"predictions": None, "version": _version, "errors": errors}
@@ -25,7 +21,6 @@ def make_prediction(
         predictions = _sp500_pipe.predict(
             X=validated_data[config.ml_config.features]
         )
-        # También retornamos probabilidades
         probabilities = _sp500_pipe.predict_proba(
             X=validated_data[config.ml_config.features]
         )[:, 1]

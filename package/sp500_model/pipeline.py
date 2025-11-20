@@ -5,11 +5,10 @@ from xgboost import XGBClassifier
 
 from sp500_model.config.core import config
 
+# Nuestro pipeline: StandardScaler -> PCA -> XGBoost
 sp500_pipe = Pipeline(
     [
-        # Estandarización
         ("scaler", StandardScaler()),
-        # PCA
         (
             "pca",
             PCA(
@@ -17,7 +16,6 @@ sp500_pipe = Pipeline(
                 random_state=config.ml_config.random_state,
             ),
         ),
-        # XGBoost
         (
             "xgboost",
             XGBClassifier(

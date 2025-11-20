@@ -8,7 +8,6 @@ from sp500_model.config.core import config
 
 
 def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
-    """Check model inputs for na values and filter."""
     validated_data = input_data.copy()
     new_vars_with_na = [
         var
@@ -21,14 +20,12 @@ def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
 
 
 def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional[dict]]:
-    """Check model inputs for unprocessable values."""
-
+    # Verificamos valores inválidos antes de predecir
     relevant_data = input_data[config.ml_config.features].copy()
     validated_data = drop_na_inputs(input_data=relevant_data)
     errors = None
 
     try:
-        # replace numpy nans so that pydantic can validate
         MultipleDataInputs(
             inputs=validated_data.replace({np.nan: None}).to_dict(orient="records")
         )
@@ -38,9 +35,8 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
     return validated_data, errors
 
 
+# Schema para nuestras 17 features técnicas
 class DataInputSchema(BaseModel):
-    """Schema para validar inputs del modelo S&P 500."""
-
     SMA_20: Optional[float]
     SMA_50: Optional[float]
     EMA_12: Optional[float]
