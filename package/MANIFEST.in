@@ -1,0 +1,15 @@
+include *.txt
+include *.md
+include *.pkl
+recursive-include ./sp500_model/*
+
+include sp500_model/trained/*.pkl
+include sp500_model/VERSION
+include sp500_model/config.yml
+
+include ./requirements/requirements.txt
+exclude *.log
+exclude *.cfg
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
