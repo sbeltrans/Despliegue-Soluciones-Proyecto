@@ -1,0 +1,6 @@
+# Dependencias mínimas para el dashboard
+pandas>=2.0.0
+plotly>=5.17.0
+dash>=3.0.0
+requests>=2.31.0
+pyarrow>=14.0.0
