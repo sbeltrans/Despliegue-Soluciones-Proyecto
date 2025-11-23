@@ -69,6 +69,10 @@ def create_metadata(ticker_stats):
 
 def main():
     """Función principal de extracción."""
+    # Create output directories if they don't exist
+    os.makedirs(OUTPUT_DIR_RAW, exist_ok=True)
+    os.makedirs(OUTPUT_DIR_METADATA, exist_ok=True)
+
     print("\nExtracción de datos OHLCV - S&P 500")
     print(f"Tickers: {', '.join(TICKERS)}")
     print(f"Periodo: {PERIOD} | Intervalo: {INTERVAL}\n")

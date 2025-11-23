@@ -1,12 +1,16 @@
 import pandas as pd
 import numpy as np
+
+# Install 'ta' library if not already installed
+#pip install ta
+
 from ta.trend import SMAIndicator, EMAIndicator, MACD
 from ta.momentum import RSIIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
 from ta.volume import OnBalanceVolumeIndicator
 import os
 import yaml
-from datetime import datetime
+from datetime import datetime, timezone # Import timezone here
 
 # Configuración
 TICKERS = ['AAPL', 'MSFT', 'NVDA', 'GOOGL', 'AMZN', 'META', 'TSLA', 'JPM', 'UNH', 'XOM']
@@ -86,7 +90,7 @@ def clean_features(df):
     """Limpia NaN pero PRESERVA las columnas de precio OHLCV."""
     # ELIMINAR SOLO columnas que no necesitamos
     # Ya NO eliminamos OHLCV - los preservamos para la aplicación
-    
+
     # Eliminar solo columnas innecesarias
     extra_cols = ['Dividends', 'Stock Splits']
     df = df.drop(columns=[col for col in extra_cols if col in df.columns], errors='ignore')
@@ -99,35 +103,35 @@ def clean_features(df):
 def save_features_with_prices(df, ticker):
     """Guarda features INCLUYENDO columnas de precio OHLCV."""
     output_file = os.path.join(OUTPUT_DIR, f'{ticker}_features.parquet')
-    
+
     # Definir el orden deseado de columnas
     base_columns = ['Ticker', 'Date']
-    
+
     # Columnas de precio OHLCV que debemos preservar
     price_columns = ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']
-    
+
     # Columnas de indicadores técnicos
     indicator_columns = [
         'SMA_20', 'SMA_50', 'EMA_12', 'EMA_26', 'RSI_14',
-        'MACD', 'MACD_signal', 'MACD_diff', 
+        'MACD', 'MACD_signal', 'MACD_diff',
         'BB_upper', 'BB_middle', 'BB_lower', 'BB_width',
         'ATR_14', 'OBV', 'Returns', 'Volatility_10', 'Volume_change', 'Target'
     ]
-    
+
     # Combinar todas las columnas (solo las que existen en el DataFrame)
     all_columns = base_columns + price_columns + indicator_columns
     existing_columns = [col for col in all_columns if col in df.columns]
-    
+
     # Reordenar el DataFrame
     df_sorted = df[existing_columns]
-    
+
     # Guardar
     df_sorted.to_parquet(output_file, index=False, engine='pyarrow', compression='snappy')
-    
+
     # Información de depuración
     price_cols_found = [col for col in price_columns if col in df.columns]
     print(f"  Precios preservados: {price_cols_found}")
-    
+
     return df_sorted
 
 
@@ -171,12 +175,12 @@ def create_metadata(stats, combined_df):
 
     total_buy = int(combined_df['Target'].sum())
     total_sell = int((combined_df['Target'] == 0).sum())
-    
+
     # Contar columnas de precio preservadas
     price_columns_preserved = [col for col in combined_df.columns if col in ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']]
 
     metadata = {
-        'transformation_date': datetime.utcnow().isoformat() + 'Z',
+        'transformation_date': datetime.now(timezone.utc).isoformat() + 'Z',
         'date_range': {'start': START_DATE, 'end': END_DATE},
         'tickers': TICKERS,
         'total_rows': len(combined_df),
@@ -244,7 +248,7 @@ def main():
         # Resumen
         total_buy = combined['Target'].sum()
         total_sell = (combined['Target'] == 0).sum()
-        
+
         price_cols_count = len([col for col in combined.columns if col in ['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])
 
         print(f"\nRESUMEN")
