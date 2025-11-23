@@ -341,7 +341,7 @@ API_FEATURE_COLUMNS = {
     "BB_width": "BB_width",
     "ATR_14": "ATR_14",
     "OBV": "OBV",
-    "Retornos": "Returns",
+    "Returns": "Returns",
     "Volatility_10": "Volatility_10",
     "Volume_change": "Volume_change",
 }
@@ -504,7 +504,6 @@ else:
                     html.Div([
                         html.H4("Backtesting del Modelo"),
                         dcc.Graph(id="g-backtest"),
-                        html.Div(id="metrics-backtest"),
                         html.P(
                             "Estrategia vs comprar y mantener.",
                             style=DESC_STYLE
@@ -519,6 +518,14 @@ else:
                             style=DESC_STYLE
                         ),
                     ], style={"width": "49%", "display": "inline-block"}),
+
+                    html.Div([
+                        html.Div(id="metrics-backtest"),
+                        html.P(
+                            "Métricas backtesting",
+                            style=DESC_STYLE
+                        ),
+                    ])
                 ], style={"marginTop": "10px"}),
 
                 # Fila 4: Resultados del modelo y ROC apilados
