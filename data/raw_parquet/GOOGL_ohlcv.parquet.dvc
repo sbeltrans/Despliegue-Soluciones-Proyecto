@@ -1,0 +1,5 @@
+outs:
+- md5: 22ef8b6724e55b572329f68cd0a2426b
+  size: 285927
+  hash: md5
+  path: GOOGL_ohlcv.parquet

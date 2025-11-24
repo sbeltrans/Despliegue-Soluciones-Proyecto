@@ -1,0 +1,5 @@
+outs:
+- md5: d61188f31351889334d96aaf7b54a7d0
+  size: 784605
+  hash: md5
+  path: XOM_ohlcv.parquet

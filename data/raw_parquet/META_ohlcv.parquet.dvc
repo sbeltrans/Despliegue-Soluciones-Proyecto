@@ -1,0 +1,5 @@
+outs:
+- md5: 5895c6b18683e1549b3364d269372d75
+  size: 180204
+  hash: md5
+  path: META_ohlcv.parquet

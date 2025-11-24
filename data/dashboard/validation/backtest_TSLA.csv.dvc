@@ -1,0 +1,5 @@
+outs:
+- md5: 0eed69f42f4c5f32a090add04ed3aa69
+  size: 32439
+  hash: md5
+  path: backtest_TSLA.csv

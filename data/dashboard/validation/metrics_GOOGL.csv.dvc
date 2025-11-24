@@ -1,0 +1,5 @@
+outs:
+- md5: 391ef6572bbbb35be0927bb262efc637
+  size: 252
+  hash: md5
+  path: metrics_GOOGL.csv

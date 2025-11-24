@@ -1,0 +1,5 @@
+outs:
+- md5: 15b2a2f28102b698d66d74fee472afdd
+  size: 113811
+  hash: md5
+  path: signals_raw.parquet

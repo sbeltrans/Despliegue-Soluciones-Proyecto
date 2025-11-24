@@ -1,0 +1,5 @@
+outs:
+- md5: 050f25c47d50b5ba3edd5768b5641e94
+  size: 32537
+  hash: md5
+  path: backtest_MSFT.csv

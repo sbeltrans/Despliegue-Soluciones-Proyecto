@@ -1,0 +1,5 @@
+outs:
+- md5: 622da1d72216d88dd5d4bc48c73c0322
+  size: 583605
+  hash: md5
+  path: JPM_ohlcv.parquet

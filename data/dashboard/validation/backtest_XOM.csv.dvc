@@ -1,0 +1,5 @@
+outs:
+- md5: 831f99d88801dfa9cd0e8a220a9a038b
+  size: 32524
+  hash: md5
+  path: backtest_XOM.csv

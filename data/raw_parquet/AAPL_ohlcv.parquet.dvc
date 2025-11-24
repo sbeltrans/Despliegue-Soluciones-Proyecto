@@ -1,0 +1,5 @@
+outs:
+- md5: f848a6417657ca838ac232156459585c
+  size: 569831
+  hash: md5
+  path: AAPL_ohlcv.parquet

@@ -1,0 +1,5 @@
+outs:
+- md5: fc5d40ed6bf75908f50ba40688bf7117
+  size: 423346
+  hash: md5
+  path: AMZN_features.parquet

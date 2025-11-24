@@ -1,0 +1,5 @@
+outs:
+- md5: 93275ffe8ad68b0e48ac3743cd48efea
+  size: 32460
+  hash: md5
+  path: backtest_GOOGL.csv

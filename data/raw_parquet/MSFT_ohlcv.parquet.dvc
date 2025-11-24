@@ -1,0 +1,5 @@
+outs:
+- md5: 1f708248611f5371254405347d4ef9ef
+  size: 518564
+  hash: md5
+  path: MSFT_ohlcv.parquet

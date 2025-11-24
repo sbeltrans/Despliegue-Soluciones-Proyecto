@@ -1,0 +1,5 @@
+outs:
+- md5: 01c7ad36b5adf4ab18d543d0aa73b619
+  size: 422716
+  hash: md5
+  path: GOOGL_features.parquet

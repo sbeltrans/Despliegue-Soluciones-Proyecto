@@ -1,0 +1,5 @@
+outs:
+- md5: dbf2095da11bc979ad5f1cbeab112c15
+  size: 422561
+  hash: md5
+  path: MSFT_features.parquet

@@ -1,0 +1,5 @@
+outs:
+- md5: 007c167a319d1dec76f8141c7eba022f
+  size: 32509
+  hash: md5
+  path: backtest_JPM.csv

@@ -1,0 +1,5 @@
+outs:
+- md5: 01b0b4cfd424d8b0479697c13f929486
+  size: 260
+  hash: md5
+  path: metrics_XOM.csv

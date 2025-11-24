@@ -1,0 +1,5 @@
+outs:
+- md5: 64558b23b56665dba4164aa97adbfb8b
+  size: 424174
+  hash: md5
+  path: TSLA_features.parquet

@@ -1,0 +1,5 @@
+outs:
+- md5: 022308acd368d04ffcc93216b46f2be5
+  size: 175177
+  hash: md5
+  path: TSLA_ohlcv.parquet

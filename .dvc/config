@@ -1,4 +1,4 @@
 [core]
     remote = s3storage
 ['remote "s3storage"']
-    url = s3://despliegue-sp500-dvc-2025/
+    url = s3://sp500-bucket-dvc/

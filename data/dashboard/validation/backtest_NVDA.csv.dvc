@@ -1,0 +1,5 @@
+outs:
+- md5: fa4a8f59e62a00e2aa93eec14ebc6b29
+  size: 32099
+  hash: md5
+  path: backtest_NVDA.csv

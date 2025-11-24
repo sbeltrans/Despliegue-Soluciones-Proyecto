@@ -1,0 +1,5 @@
+outs:
+- md5: 61a149dea9dd74ed582faf356a1b8cb0
+  size: 32449
+  hash: md5
+  path: backtest_AMZN.csv

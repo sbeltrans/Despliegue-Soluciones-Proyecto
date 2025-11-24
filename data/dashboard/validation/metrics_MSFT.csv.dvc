@@ -1,0 +1,5 @@
+outs:
+- md5: 25f542d42910a4b7c886bfb87770a5c2
+  size: 251
+  hash: md5
+  path: metrics_MSFT.csv

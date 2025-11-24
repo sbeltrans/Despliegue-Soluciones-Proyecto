@@ -1,0 +1,5 @@
+outs:
+- md5: dbf68f183aa2ca784b5f2b1cf0265f3d
+  size: 251
+  hash: md5
+  path: metrics_AAPL.csv

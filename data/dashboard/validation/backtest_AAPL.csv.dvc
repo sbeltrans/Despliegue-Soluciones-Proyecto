@@ -1,0 +1,5 @@
+outs:
+- md5: 7653e65135772eab6b0fc4caaf8de067
+  size: 32549
+  hash: md5
+  path: backtest_AAPL.csv

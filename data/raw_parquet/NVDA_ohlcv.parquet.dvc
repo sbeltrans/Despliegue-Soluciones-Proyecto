@@ -1,0 +1,5 @@
+outs:
+- md5: 44401cc00a210d4532fd7c5fa89aeefc
+  size: 355688
+  hash: md5
+  path: NVDA_ohlcv.parquet

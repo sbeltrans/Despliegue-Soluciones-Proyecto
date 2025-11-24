@@ -1,0 +1,5 @@
+outs:
+- md5: 19d24b06d41fe779d6a69ab1d81a469c
+  size: 251
+  hash: md5
+  path: metrics_AMZN.csv

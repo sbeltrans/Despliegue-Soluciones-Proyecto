@@ -1,0 +1,5 @@
+outs:
+- md5: 1a613d5fc87ea915007375fc35bd062b
+  size: 422332
+  hash: md5
+  path: JPM_features.parquet

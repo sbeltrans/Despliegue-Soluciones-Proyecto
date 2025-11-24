@@ -1,0 +1,5 @@
+outs:
+- md5: 95b7bf026670fc17e0a65f6f5332c1a9
+  size: 89277
+  hash: md5
+  path: signals_all_tickers.parquet

@@ -1,0 +1,5 @@
+outs:
+- md5: 092e28e9167128f9d386e8267b651c45
+  size: 319294
+  hash: md5
+  path: AMZN_ohlcv.parquet

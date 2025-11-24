@@ -1,0 +1,5 @@
+outs:
+- md5: 5f62969d8cef62eed07681d2b832ed46
+  size: 250
+  hash: md5
+  path: metrics_NVDA.csv
