@@ -1,0 +1,24 @@
+# Dockerfile para el Dashboard
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copiar requirements e instalar dependencias
+COPY dashboard-requirements.txt .
+RUN pip install --no-cache-dir -r dashboard-requirements.txt
+
+# Copiar código del dashboard
+COPY app.py .
+
+# Copiar solo los datos que necesita el dashboard
+COPY data/processed/*_features.parquet ./data/processed/
+COPY data/model_results/ ./data/model_results/
+COPY data/dashboard/ ./data/dashboard/
+COPY data/raw_parquet/ ./data/raw_parquet/
+
+# Exponer puerto del dashboard
+EXPOSE 8050
+
+# Comando para ejecutar el dashboard
+# Usamos python -c para ejecutar con host='0.0.0.0' y poder acceder desde fuera del contenedor
+CMD ["python", "-c", "from app import app; app.run(host='0.0.0.0', port=8050, debug=False)"]

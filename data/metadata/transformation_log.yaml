@@ -1,4 +1,4 @@
-transformation_date: '2025-10-26T18:01:11.838242Z'
+transformation_date: '2025-11-11T12:46:27.728082Z'
 date_range:
   start: '2015-01-01'
   end: '2024-12-31'
@@ -14,6 +14,12 @@ tickers:
 - UNH
 - XOM
 total_rows: 25160
+price_columns_preserved:
+- Open
+- High
+- Low
+- Close
+- Volume
 technical_indicators:
 - SMA_20
 - SMA_50
@@ -33,7 +39,7 @@ additional_features:
 - Returns
 - Volatility_10
 - Volume_change
-total_features: 17
+total_features: 22
 target_definition: Y = 1 si Close(t+1) > Close(t), 0 en caso contrario
 target_distribution:
   Comprar (1): 13281
@@ -42,61 +48,121 @@ target_distribution:
 ticker_stats:
   AAPL:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1339
       Vender: 1177
   MSFT:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1345
       Vender: 1171
   NVDA:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1373
       Vender: 1143
   GOOGL:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1352
       Vender: 1164
   AMZN:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1346
       Vender: 1170
   META:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1321
       Vender: 1195
   TSLA:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1303
       Vender: 1213
   JPM:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1303
       Vender: 1213
   UNH:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1330
       Vender: 1186
   XOM:
     rows: 2516
-    features: 17
+    features: 22
+    price_columns:
+    - Open
+    - High
+    - Low
+    - Close
+    - Volume
     target_distribution:
       Comprar: 1269
       Vender: 1247
